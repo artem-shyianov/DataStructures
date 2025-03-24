@@ -1,21 +1,33 @@
 // Implements FIFO - first in/first out
 // Array implementation
 struct Queque<T> {
-    private var items: [T] = []
+    private var head: Node<T>?
+    private var tail: Node<T>?
+    
+    func isEmpty() -> Bool {
+        return head == nil
+    }
     
     mutating func enqueue(_ element: T) {
-        items.append(element)
+        if isEmpty() {
+            head = Node<T>(element)
+            tail = head
+            return
+        }
+        
+        let newNode = Node<T>(element)
+        tail?.next = newNode
+        tail = tail?.next
     }
     
     mutating func dequeue() -> T? {
-        guard !items.isEmpty else {
-            return nil
-        }
+        let current = head
+        head = head?.next
         
-        return items.removeFirst()
+        return current?.value
     }
     
     func peek() -> T? {
-        return items.first
+        return head?.value
     }
 }
