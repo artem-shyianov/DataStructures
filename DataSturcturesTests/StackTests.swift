@@ -18,7 +18,20 @@ struct StackTests {
         stack.push(2)
         stack.push(3)
         
-        let element = stack.pop()
+        #expect(stack.count == 3)
+        
+        var element = stack.pop()
         #expect(element == 3)
+        #expect(stack.count == 2)
+        
+        element = stack.pop()
+        
+        #expect(stack.count == 1)
+        #expect(element == 2)
+        
+        element = stack.pop()
+        #expect(element == 1)
+        
+        #expect(stack.count == 0)
     }
 }
